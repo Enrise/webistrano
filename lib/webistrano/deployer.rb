@@ -151,7 +151,12 @@ module Webistrano
     end
 
     def resolve_references(config, value)
-      value = value.dup.to_s
+      if value.nil?
+        value = ""
+      else
+        value = value.dup.to_s
+      end
+
       references = value.scan(/#\{([a-zA-Z_]+)\}/)
       unless references.blank?
         references.flatten.compact.each do |ref|
